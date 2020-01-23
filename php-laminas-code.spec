@@ -39,8 +39,6 @@ BuildRequires:  php-pcre
 BuildRequires:  php-reflection
 BuildRequires:  php-spl
 BuildRequires:  php-tokenizer
-# remirepo:1
-%if 0%{?fedora} >= 27 || 0%{?rhel} >= 8
 BuildRequires: (php-autoloader(%{gh_owner}/laminas-eventmanager)       >= 3.0   with php-autoloader(%{gh_owner}/laminas-eventmanager)       < 4)
 BuildRequires: (php-composer(%{gh_owner}/laminas-zendframework-bridge) >= 1.0   with php-composer(%{gh_owner}/laminas-zendframework-bridge) < 2)
 # From composer, "require-dev": {
@@ -51,14 +49,6 @@ BuildRequires: (php-composer(%{gh_owner}/laminas-zendframework-bridge) >= 1.0   
 #        "phpunit/phpunit": "^7.5.16 || ^8.4"
 BuildRequires: (php-composer(doctrine/annotations)                     >= 1.7    with php-composer(doctrine/annotations)                    < 2)
 BuildRequires: (php-autoloader(%{gh_owner}/laminas-stdlib)             >= 3.0    with php-autoloader(%{gh_owner}/laminas-stdlib)            < 4)
-# remirepo:7
-%else
-BuildRequires:  php-laminas-eventmanager
-BuildRequires:  php-laminas-zendframework-bridge
-BuildRequires:  php-composer(doctrine/annotations)                     <  2
-BuildRequires:  php-composer(doctrine/annotations)                     >= 1.7
-BuildRequires:  php-laminas-stdlib
-%endif
 BuildRequires:  phpunit8 >= 8.4
 %endif
 # Autoloader
@@ -70,8 +60,6 @@ BuildRequires:  php-fedora-autoloader-devel
 #        "laminas/laminas-zendframework-bridge": "^1.0"
 Requires:       php(language) >= 7.1
 %if ! %{bootstrap}
-# remirepo:1
-%if 0%{?fedora} >= 27 || 0%{?rhel} >= 8
 Requires:      (php-autoloader(%{gh_owner}/laminas-eventmanager)       >= 3.0   with php-autoloader(%{gh_owner}/laminas-eventmanager)       < 4)
 Requires:      (php-composer(%{gh_owner}/laminas-zendframework-bridge) >= 1.0   with php-composer(%{gh_owner}/laminas-zendframework-bridge) < 2)
 # From composer, "suggest": {
@@ -79,11 +67,6 @@ Requires:      (php-composer(%{gh_owner}/laminas-zendframework-bridge) >= 1.0   
 #         "laminas/laminas-stdlib": "Laminas\\Stdlib component"
 Suggests:       php-composer(doctrine/annotations)
 Suggests:       php-autoloader(%{gh_owner}/laminas-stdlib)
-# remirepo:4
-%else
-Requires:       php-laminas-eventmanager
-Requires:       php-laminas-zendframework-bridge
-%endif
 # Autoloader
 Requires:       php-composer(fedora/autoloader)
 %endif
@@ -93,9 +76,6 @@ Requires:       php-reflection
 Requires:       php-spl
 Requires:       php-tokenizer
 
-# remirepo:2
-Obsoletes:      php-ZendFramework2-%{library}             < 2.5
-Provides:       php-ZendFramework2-%{library}             = %{version}
 # Compatibily ensure by the bridge
 Obsoletes:      php-zendframework-%{zf_name}              < 3.4.1-99
 Provides:       php-zendframework-%{zf_name}              = %{version}-99
@@ -184,8 +164,6 @@ exit $ret
 
 
 %files
-# remirepo:1
-%{!?_licensedir:%global license %%doc}
 %license LICENSE
 %doc *.md
 %doc composer.json
