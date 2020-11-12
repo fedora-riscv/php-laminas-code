@@ -7,7 +7,7 @@
 # Please, preserve the changelog entries
 #
 %global bootstrap    0
-%global gh_commit    1cb8f203389ab1482bf89c0e70a04849bacd7766
+%global gh_commit    cb90ef428da9260c2deaa827b037c20695f968ae
 %global gh_short     %(c=%{gh_commit}; echo ${c:0:7})
 %global gh_owner     laminas
 %global gh_project   laminas-code
@@ -22,8 +22,8 @@
 %endif
 
 Name:           php-%{gh_project}
-Version:        3.4.1
-Release:        4%{?dist}
+Version:        3.5.0
+Release:        1%{?dist}
 Summary:        Laminas Framework %{library} component
 
 License:        BSD
@@ -39,29 +39,29 @@ BuildRequires:  php-pcre
 BuildRequires:  php-reflection
 BuildRequires:  php-spl
 BuildRequires:  php-tokenizer
-BuildRequires: (php-autoloader(%{gh_owner}/laminas-eventmanager)       >= 3.0   with php-autoloader(%{gh_owner}/laminas-eventmanager)       < 4)
-BuildRequires: (php-composer(%{gh_owner}/laminas-zendframework-bridge) >= 1.0   with php-composer(%{gh_owner}/laminas-zendframework-bridge) < 2)
+BuildRequires: (php-autoloader(%{gh_owner}/laminas-eventmanager)       >= 3.3   with php-autoloader(%{gh_owner}/laminas-eventmanager)       < 4)
+BuildRequires: (php-composer(%{gh_owner}/laminas-zendframework-bridge) >= 1.1   with php-composer(%{gh_owner}/laminas-zendframework-bridge) < 2)
 # From composer, "require-dev": {
 #        "ext-phar": "*",
-#        "doctrine/annotations": "^1.7",
-#        "laminas/laminas-coding-standard": "^1.0",
-#        "laminas/laminas-stdlib": "^2.7 || ^3.0",
-#        "phpunit/phpunit": "^7.5.16 || ^8.4"
-BuildRequires: (php-composer(doctrine/annotations)                     >= 1.7    with php-composer(doctrine/annotations)                    < 2)
-BuildRequires: (php-autoloader(%{gh_owner}/laminas-stdlib)             >= 3.0    with php-autoloader(%{gh_owner}/laminas-stdlib)            < 4)
-BuildRequires:  phpunit8 >= 8.4
+#        "doctrine/annotations": "^1.10.4",
+#        "laminas/laminas-coding-standard": "^1.0.0",
+#        "laminas/laminas-stdlib": "^3.3.0",
+#        "phpunit/phpunit": "^9.4.2"
+BuildRequires: (php-composer(doctrine/annotations)                     >= 1.10.4 with php-composer(doctrine/annotations)                    < 2)
+BuildRequires: (php-autoloader(%{gh_owner}/laminas-stdlib)             >= 3.3    with php-autoloader(%{gh_owner}/laminas-stdlib)            < 4)
+BuildRequires:  phpunit9 >= 9.4.2
 %endif
 # Autoloader
 BuildRequires:  php-fedora-autoloader-devel
 
 # From composer, "require": {
-#        "php": "^7.1",
-#        "laminas/laminas-eventmanager": "^2.6 || ^3.0",
-#        "laminas/laminas-zendframework-bridge": "^1.0"
-Requires:       php(language) >= 7.1
+#        "php": "^7.3 || ~8.0.0",
+#        "laminas/laminas-eventmanager": "^3.3",
+#        "laminas/laminas-zendframework-bridge": "^1.1"
+Requires:       php(language) >= 7.3
 %if ! %{bootstrap}
-Requires:      (php-autoloader(%{gh_owner}/laminas-eventmanager)       >= 3.0   with php-autoloader(%{gh_owner}/laminas-eventmanager)       < 4)
-Requires:      (php-composer(%{gh_owner}/laminas-zendframework-bridge) >= 1.0   with php-composer(%{gh_owner}/laminas-zendframework-bridge) < 2)
+Requires:      (php-autoloader(%{gh_owner}/laminas-eventmanager)       >= 3.3   with php-autoloader(%{gh_owner}/laminas-eventmanager)       < 4)
+Requires:      (php-composer(%{gh_owner}/laminas-zendframework-bridge) >= 1.1   with php-composer(%{gh_owner}/laminas-zendframework-bridge) < 2)
 # From composer, "suggest": {
 #         "doctrine/annotations": "Doctrine\\Common\\Annotations >=1.0 for annotation features",
 #         "laminas/laminas-stdlib": "Laminas\\Stdlib component"
@@ -77,8 +77,8 @@ Requires:       php-spl
 Requires:       php-tokenizer
 
 # Compatibily ensure by the bridge
-Obsoletes:      php-zendframework-%{zf_name}              < 3.4.1-99
-Provides:       php-zendframework-%{zf_name}              = %{version}-99
+Obsoletes:      php-zendframework-%{zf_name}              < 3.4.2
+Provides:       php-zendframework-%{zf_name}              = %{version}
 Provides:       php-composer(%{gh_owner}/%{gh_project})   = %{version}
 Provides:       php-composer(zendframework/%{zf_name})    = %{version}
 Provides:       php-autoloader(%{gh_owner}/%{gh_project}) = %{version}
@@ -145,9 +145,9 @@ require_once '%{buildroot}%{php_home}/%{namespace}/%{library}/autoload.php';
 EOF
 
 ret=0
-for cmd in php php72 php73 php74; do
+for cmd in php php73 php74 php80; do
   if which $cmd; then
-    $cmd %{_bindir}/phpunit8 --verbose || ret=1
+    $cmd %{_bindir}/phpunit9 --verbose || ret=1
   fi
 done
 
@@ -172,6 +172,13 @@ exit $ret
 
 
 %changelog
+* Thu Nov 12 2020 Remi Collet <remi@remirepo.net> - 3.5.0-1
+- update to 3.5.0
+- raise dependency on PHP 7.3
+- raise dependency on laminas-eventmanager 3.3
+- raise dependency on laminas-zendframework-bridge 1..1
+- switch to phpunit9
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.1-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
