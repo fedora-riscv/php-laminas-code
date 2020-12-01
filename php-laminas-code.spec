@@ -7,7 +7,7 @@
 # Please, preserve the changelog entries
 #
 %global bootstrap    0
-%global gh_commit    cb90ef428da9260c2deaa827b037c20695f968ae
+%global gh_commit    b549b70c0bb6e935d497f84f750c82653326ac77
 %global gh_short     %(c=%{gh_commit}; echo ${c:0:7})
 %global gh_owner     laminas
 %global gh_project   laminas-code
@@ -22,7 +22,7 @@
 %endif
 
 Name:           php-%{gh_project}
-Version:        3.5.0
+Version:        3.5.1
 Release:        1%{?dist}
 Summary:        Laminas Framework %{library} component
 
@@ -172,6 +172,9 @@ exit $ret
 
 
 %changelog
+* Tue Dec  1 2020 Remi Collet <remi@remirepo.net> - 3.5.1-1
+- update to 3.5.1 (no change)
+
 * Thu Nov 12 2020 Remi Collet <remi@remirepo.net> - 3.5.0-1
 - update to 3.5.0
 - raise dependency on PHP 7.3
