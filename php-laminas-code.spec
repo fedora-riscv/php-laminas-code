@@ -23,7 +23,7 @@
 
 Name:           php-%{gh_project}
 Version:        3.5.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Laminas Framework %{library} component
 
 License:        BSD
@@ -172,6 +172,9 @@ exit $ret
 
 
 %changelog
+* Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 3.5.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Tue Dec  1 2020 Remi Collet <remi@remirepo.net> - 3.5.1-1
 - update to 3.5.1 (no change)
 
