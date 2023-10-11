@@ -6,7 +6,7 @@
 #
 # Please, preserve the changelog entries
 #
-%global bootstrap    0
+%global bootstrap    1
 %global gh_commit    b549b70c0bb6e935d497f84f750c82653326ac77
 %global gh_short     %(c=%{gh_commit}; echo ${c:0:7})
 %global gh_owner     laminas
@@ -23,7 +23,7 @@
 
 Name:           php-%{gh_project}
 Version:        3.5.1
-Release:        6%{?dist}
+Release:        6.rv64%{?dist}
 Summary:        Laminas Framework %{library} component
 
 License:        BSD
